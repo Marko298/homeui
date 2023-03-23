@@ -44,7 +44,7 @@ case "$1" in
             # if conffile (i.e. v2) is present, do nothing
             if [ ! -e "$CONFFILE" ]; then
                 #check if old config is present
-                if [ ! `mqtt-get-dump '/config/#' | wc -l` = "0" ]; then
+                if ! ischroot && [ ! `mqtt-get-dump '/config/#' | wc -l` = "0" ]; then
                     convert_config
                 else
                     install_default_config

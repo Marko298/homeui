@@ -1,3 +1,9 @@
+wb-mqtt-homeui (2.59.1) stable; urgency=medium
+
+  * Fix mqtt-get-dump errors when installing in chroot
+
+ -- Nikita Maslov <nikita.maslov@wirenboard.ru>  Fri, 24 Mar 2023 00:37:58 +0600
+
 wb-mqtt-homeui (2.59.0) stable; urgency=medium
 
   * Add option to hide system devices
