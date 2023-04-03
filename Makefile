@@ -14,9 +14,8 @@ build:
 	git config url."https://".insteadOf git://
 	git submodule foreach --recursive git config url."https://".insteadOf git://
 	
-	npm run clean  # clean target may fail in sbuild because required node version is not installed yet
-
 	npm install
+	npm run clean  # clean target may fail in sbuild because required node version is not installed yet
 	git submodule init
 	git submodule update
 	npm run build
