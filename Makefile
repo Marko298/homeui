@@ -5,7 +5,7 @@ PATH := /usr/local/bin:$(PATH)
 all: build
 
 clean:
-	npm run clean
+	npm run clean || true
 
 build:
 	# FIXME: this replaces git:// with https:// somewhere in node modules
@@ -13,6 +13,8 @@ build:
 	# (https://github.blog/2021-09-01-improving-git-protocol-security-github/)
 	git config url."https://".insteadOf git://
 	git submodule foreach --recursive git config url."https://".insteadOf git://
+	
+	npm run clean  # clean target may fail in sbuild because required node version is not installed yet
 
 	npm install
 	git submodule init
