@@ -1,1 +1,1 @@
-buildDebSbuild defaultTargets: 'stretch-armhf'
+buildDebArchAll defaultDebianRelease: 'stretch'
