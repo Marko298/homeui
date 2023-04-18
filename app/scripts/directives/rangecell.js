@@ -33,7 +33,6 @@ function rangeCellDirective() {
         });
       }*/
 
-
       /*relayAttr("min", DEFAULT_MIN);
       relayAttr("max", DEFAULT_MAX);
       relayAttr("step", DEFAULT_STEP);*/
@@ -50,13 +49,32 @@ function rangeCellDirective() {
         }
       };*/
 
-      $scope["min"] = !cellCtrl.cell["min"]? DEFAULT_MIN : +cellCtrl.cell["min"];
-      $scope["max"] = !cellCtrl.cell["max"]? DEFAULT_MAX : +cellCtrl.cell["max"];
-      $scope["step"] = !cellCtrl.cell["step"]? DEFAULT_STEP : +cellCtrl.cell["step"];
+      function watchAttr (name, defaultValue) {
+        $scope.$watch(() => cellCtrl.cell[name], newValue => {
+          $scope[name] = !newValue? defaultValue : +newValue;
+        });
+      }
+
+      // $scope["min"] = !cellCtrl.cell["min"]? DEFAULT_MIN : +cellCtrl.cell["min"];
+      // $scope["max"] = !cellCtrl.cell["max"]? DEFAULT_MAX : +cellCtrl.cell["max"];
+      // $scope["step"] = !cellCtrl.cell["step"]? DEFAULT_STEP : +cellCtrl.cell["step"];
+
+      watchAttr("max", DEFAULT_MAX);
+      watchAttr("min", DEFAULT_MIN);
+      watchAttr("step", DEFAULT_STEP);
+
+      console.log("CellCtrl.cell: ", cellCtrl.cell);
 
       $scope.$watch(() => $scope.cell.value, value => {
+        console.log("Update value: ", value);
+        console.log("Scope cell: ", $scope.cell);
         $scope._value = isNaN(value)? 0 : value;
       });
+
+      // $scope.$watch(() => $scope.cell.max, value => {
+      //   console.log("Scope cell max: ", value);
+      //   $scope["max"] = value;
+      // });
 
       // из-за отсутствия debounce присваиваю значение только если отпуcтить ручку контрола
       $scope.handleUp = function() {
